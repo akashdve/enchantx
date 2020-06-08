@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="EnchantX",
-    version="0.1",
+    version="0.1.1",
     author="AkashD",
     author_email="akashdave555@gmail.com",
     description="An extension of PyEnchant Wrapper",
