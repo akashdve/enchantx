@@ -4,11 +4,11 @@ from enchant import Dict
 from enchantx.vectorizer import WORD2VEC
 
 
-class XDict():
+class XDict:
 
-    def __init__(self, tag=None, broker=None):
+    def __init__(self, model_path=None, tag=None, broker=None):
         self.enchant_obj = Dict(tag=tag, broker=broker)
-        self.enchantX = WORD2VEC()
+        self.enchantX = WORD2VEC(model_path)
 
     def check(self, word) -> bool:
         return self.enchant_obj.check(word)
