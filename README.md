@@ -55,7 +55,7 @@ How do I use it?
 ---------------
 
     >>> import enchantx
-    >>> spellchecker = enchantx.XDict("/home/ubuntu/GoogleNews-vectors-negative300.bin")
+    >>> spellchecker = enchantx.XDict("/home/akash/GoogleNews-vectors-negative300.bin")
     >>> spellchecker.check("wofl")
     False
     >>> spellchecker.suggest("wofl")
