@@ -53,7 +53,10 @@ It is recommended to provide the path of binary file while creating the XDict Ob
 
 How do I use it?
 ---------------
-
+**Warning**: XDict object is NOT Thread Safe. You may encounter "Segmentation Fault Error" or certain crashes. The reason is this package depends on the pyenchant 
+package which does not currently supports multithreading.
+[Read more ...](https://github.com/pyenchant/pyenchant/issues/206)
+ 
     >>> import enchantx
     >>> spellchecker = enchantx.XDict("/home/akash/GoogleNews-vectors-negative300.bin")
     >>> spellchecker.check("wofl")
