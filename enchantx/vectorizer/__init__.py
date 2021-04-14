@@ -7,7 +7,6 @@ from gensim.models import KeyedVectors
 from six import string_types
 
 
-logging.basicConfig(filename="vectorizer.log")
 logger = logging.getLogger(__name__)
 logger.setLevel(level=logging.WARNING)
 
