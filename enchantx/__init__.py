@@ -1,4 +1,9 @@
+import gzip
+import os
+import shutil
+
 import numpy as np
+import wget
 
 from enchant import Dict
 from enchantx.vectorizer import WORD2VEC
@@ -46,7 +51,7 @@ class XDict:
         in order to give smart suggestions for misspelled words.
 
         It is recommended to give model path while creating XDict object.
-        Otherwise XDict will try to search the model at following locations:
+        Otherwise XDict will try to download and search the model at following locations:
         1) /home/$USER/.enchantx/GoogleNews-vectors-negative300.bin
         2) In current working directory
 
@@ -65,8 +70,25 @@ class XDict:
         may be specified using <broker>.  If not given, the default broker
         is used.
         """
+        self._home_dir = os.path.expanduser("~/.enchantx")
+        self._create_home_dir_and_download_glove()
         self.enchant_obj = Dict(tag=tag, broker=broker)
         self.enchantX = WORD2VEC(model_path)
+
+    def _create_home_dir_and_download_glove(self):
+        try:
+            os.makedirs(self._home_dir, exist_ok=False)
+            file_path = wget.download("https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz",
+                                      os.path.join(self._home_dir, "GoogleNews-vectors-negative300.bin.gz"))
+        except:
+            file_path = ""
+
+        try:
+            with gzip.open(file_path, 'rb') as f_in:
+                with open(os.path.join(self._home_dir, 'GoogleNews-vectors-negative300.bin'), 'wb') as f_out:
+                    shutil.copyfileobj(f_in, f_out)
+        except:
+            pass
 
     def check(self, word) -> bool:
         """Check spelling of a word.
