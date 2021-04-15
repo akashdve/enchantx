@@ -71,9 +71,10 @@ class XDict:
         is used.
         """
         self._home_dir = os.path.expanduser("~/.enchantx")
-        self._create_home_dir_and_download_glove()
         self.enchant_obj = Dict(tag=tag, broker=broker)
         self.enchantX = WORD2VEC(model_path)
+        if model_path is None:
+            self._create_home_dir_and_download_glove()
 
     def _create_home_dir_and_download_glove(self):
         try:
